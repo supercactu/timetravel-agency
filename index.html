@@ -12,7 +12,7 @@
   --pistach-dark:#6F8F52;
   --wood:#8B5E3C;
   --wood-dark:#5C3B23;
-  --dark:#8B5E3C;
+  --dark:#C8A27A;
   --surface:#151815;
   --surface2:#1E221E;
   --text:#EDE9E3;
@@ -108,17 +108,19 @@
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div style="position: relative; z-index: 1; max-width: 500px; margin: 0 auto; padding: 0 20px; text-align: center;">
+  <div style="position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 20px;text-align:center;">
     <div class="badge">Voyages Temporels de Luxe</div>
     <h1>À travers les <em>âges</em>,<br>avec élégance et caractère</h1>
-    <p>Une agence d'exception pour des voyageurs d'exception. Choisissez votre ère, vivez l'Histoire.</p>
+    <p style="font-size:1.25rem;color:var(--muted);max-width:500px;line-height:1.7;margin:0 auto 3rem;font-weight:300;">
+      Une agence d'exception pour des voyageurs d'exception. Choisissez votre ère, vivez l'Histoire.
+    </p>
     <div class="cta-group">
       <button class="btn-primary" onclick="document.getElementById('destinations').scrollIntoView({behavior:'smooth'})">Découvrir les destinations</button>
       <button class="btn-outline" onclick="toggleChat()">Parler à un conseiller</button>
     </div>
   </div>
 </section>
-
+  
 <section class="destinations" id="destinations">
   <div class="destinations-intro">
     <div class="section-label">Nos destinations</div>
