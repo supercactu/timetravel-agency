@@ -50,7 +50,7 @@ Deux modes sont disponibles :
 Le projet est hébergé via **GitHub Pages**.
 
 Lien du site :
-👉 (https://github.com/supercactu/timetravel-agency)
+👉 (https://supercactu.github.io/timetravel-agency/)
 
 ## 📁 Structure du projet
 
