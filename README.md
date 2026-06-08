@@ -37,7 +37,7 @@ Les visiteurs peuvent explorer plusieurs époques, obtenir des conseils personna
 
 ## Déploiement
 
-Projet hébergé sur Vercel.
+Projet hébergé sur GitHub Pages.
 
 ## Membres du groupe
 Andraws Pascal
