@@ -1,44 +1,70 @@
-# TimeTravel Agency
+# ⏳ TimeTravel Agency
 
 ## Description
 
-TimeTravel Agency est une webapp immersive de voyage temporel permettant aux utilisateurs de découvrir différentes destinations historiques et préhistoriques.
+TimeTravel Agency est une webapp immersive de voyage temporel fictif permettant aux utilisateurs d’explorer différentes époques historiques et préhistoriques à travers une expérience interactive et narrative.
 
-Les visiteurs peuvent explorer plusieurs époques, obtenir des conseils personnalisés via un assistant conversationnel et découvrir les expériences proposées par l'agence.
+Le site simule une agence de voyages temporels haut de gamme avec une interface moderne, un design premium et un assistant conversationnel intégré.
 
-## Destinations
+## 🌍 Destinations proposées
 
 * Paris 1889 — Belle Époque et Exposition Universelle
-* Crétacé — Observation des dinosaures
-* Florence 1504 — Renaissance italienne
+* Crétacé — Observation des dinosaures dans leur environnement naturel
+* Florence 1504 — Renaissance italienne et apogée artistique
 
-## Technologies utilisées
+## ⚙️ Technologies utilisées
 
 * HTML5
-* CSS3
-* JavaScript
-* GitHub
-* GitHub Pages
+* CSS3 (design responsive + animations)
+* JavaScript (interactions et chatbot)
+* GitHub / GitHub Pages (hébergement et déploiement)
 
-## Fonctionnalités
+## ✨ Fonctionnalités
 
-* Landing page immersive
-* Navigation responsive
-* Galerie interactive de destinations
-* Assistant conversationnel
-* Design premium dark mode
-* Animations et interactions utilisateur
+* Landing page immersive avec design “luxury travel”
+* Navigation fluide et responsive
+* Cartes interactives des destinations
+* Assistant conversationnel intégré (“Chronos”)
 
-## Outils IA utilisés
+  * Mode local (réponses prédéfinies)
+  * Mode API (Claude prêt à être activé)
+* Interface chat animée (typing indicator, messages dynamiques)
+* Effets visuels modernes (grid animé, hover, transitions)
+* Expérience utilisateur orientée storytelling
 
-* ChatGPT
-* Claude
-* Génération d'images IA (Projet TimeTravel précédent)
+## 🤖 Assistant IA (Chronos)
 
-## Déploiement
+L’assistant virtuel peut :
 
-Projet hébergé sur GitHub Pages.
+* Recommander des destinations temporelles
+* Donner des informations sur chaque époque
+* Simuler une conversation de conseiller de voyage
 
-## Membres du groupe
-Andraws Pascal
-Maimouni Mouhcine
+Deux modes sont disponibles :
+
+* **Mode local** : réponses rapides sans API
+* **Mode Claude (désactivé par défaut)** : connexion à l’API Anthropic
+
+## 🚀 Déploiement
+
+Le projet est hébergé via **GitHub Pages**.
+
+Lien du site :
+👉 (https://github.com/supercactu/timetravel-agency)
+
+## 📁 Structure du projet
+
+* `index.html` — page principale (UI + logique JS intégrée)
+* `images/` — visuels des destinations
+* `README.md` — documentation du projet
+
+## 🧠 Outils IA utilisés
+
+* ChatGPT (développement, structure, assistance code)
+* Claude (intégration prévue pour le chatbot)
+* IA générative pour concepts visuels
+
+## 👥 Membres du groupe
+
+* ANDRAWS Pascal
+* MAIMOUNIE Mouhcine
