@@ -41,8 +41,24 @@
   .card:hover{transform:translateY(-4px);border-color:var(--gold)}
   .card-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden}
   .card-img-paris{background-image:url('./images/Paris.jpg'); background-size:cover; background-position:center;}  
-  .card-img-cretace{background:linear-gradient(135deg,#0a1a0a 0%,#1a3020 50%,#0a1a0a 100%)}
-  .card-img-florence{background:linear-gradient(135deg,#1a1000 0%,#302000 50%,#1a1000 100%)}
+  .card-img-cretace{background-image:url('./images/Crétacé.jpg'); background-size:cover; background-position:center;}
+  .card-img-florence{background-image:url('./images/Florence.jpg'); background-size:cover; background-position:center;}
+  .card-img{
+  height:200px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card-img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.45)
+  );
+}
   .card-era{position:absolute;top:1rem;right:1rem;font-size:0.7rem;letter-spacing:2px;color:var(--gold);border:1px solid var(--border);padding:0.3rem 0.7rem;background:rgba(10,10,15,0.8)}
   .card-body{padding:1.5rem}
   .card-body h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;margin-bottom:0.5rem}
