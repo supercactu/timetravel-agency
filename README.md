@@ -18,7 +18,7 @@ Les visiteurs peuvent explorer plusieurs époques, obtenir des conseils personna
 * CSS3
 * JavaScript
 * GitHub
-* Vercel
+* GitHub Pages
 
 ## Fonctionnalités
 
