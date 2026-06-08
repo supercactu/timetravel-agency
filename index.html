@@ -8,15 +8,15 @@
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-  --pistach:#A8C686;        /* vert doux principal */
-  --pistach-dark:#6F8F52;   /* accents */
-  --wood:#8B5E3C;           /* bois principal */
-  --wood-dark:#5C3B23;      /* fond bois */
-  --dark:#0E0F0E;           /* quasi noir naturel */
-  --surface:#151815;        /* blocs */
-  --surface2:#1E221E;       /* cards */
-  --text:#EDE9E3;           /* texte clair */
-  --muted:#B7B0A6;          /* texte secondaire */
+  --pistach:#A8C686;
+  --pistach-dark:#6F8F52;
+  --wood:#8B5E3C;
+  --wood-dark:#5C3B23;
+  --dark:#0E0F0E;
+  --surface:#151815;
+  --surface2:#1E221E;
+  --text:#EDE9E3;
+  --muted:#B7B0A6;
   --border:rgba(168,198,134,0.25);
 }
   body{background:var(--dark);color:var(--text);font-family:'Crimson Pro',Georgia,serif;min-height:100vh;overflow-x:hidden}
@@ -48,25 +48,11 @@
   .card{background:var(--surface2);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform 0.3s,border-color 0.3s;position:relative}
   .card:hover{transform:translateY(-4px);border-color:var(--pistach)}
   .card-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden}
-  .card-img-paris{background-image:url('./images/Paris.jpg'); background-size:cover; background-position:center;}  
+  .card-img-paris{background-image:url('./images/Paris.jpg'); background-size:cover; background-position:center;}
   .card-img-cretace{background-image:url('./images/Crétacé.jpg'); background-size:cover; background-position:center;}
   .card-img-florence{background-image:url('./images/Florence.jpg'); background-size:cover; background-position:center;}
-  .card-img{
-  height:200px;
-  position:relative;
-  overflow:hidden;
-}
-
-.card-img::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0.45)
-  );
-}
+  .card-img{height:200px;position:relative;overflow:hidden;}
+  .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.45));}
   .card-era{position:absolute;top:1rem;right:1rem;font-size:0.7rem;letter-spacing:2px;color:var(--pistach);border:1px solid var(--border);padding:0.3rem 0.7rem;background:rgba(10,10,15,0.8)}
   .card-body{padding:1.5rem}
   .card-body h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;margin-bottom:0.5rem}
@@ -208,7 +194,7 @@
 
 <footer>
   <p>© 2024 TimeTravel Agency — Voyages Temporels de Luxe</p>
-  <p style="margin-top:0.5rem;font-size:0.8rem">Stack : HTML/CSS/JS · Chatbot : Claude API · Hébergement : Vercel</p>
+  <p style="margin-top:0.5rem;font-size:0.8rem">Stack : HTML/CSS/JS · Chatbot : Local · Hébergement : Vercel</p>
 </footer>
 
 <button class="chat-toggle" onclick="toggleChat()" aria-label="Ouvrir le chat">💬</button>
@@ -243,64 +229,126 @@ function askBot(q){
   sendMsg();
 }
 
-const SYSTEM=`Tu es Chronos, l'assistant virtuel de TimeTravel Agency, une agence de voyage temporel de luxe.
-Ton rôle : conseiller les clients sur les meilleures destinations temporelles.
-Ton ton : professionnel mais chaleureux, passionné d'histoire, enthousiaste sans être trop familier.
-Tu connais parfaitement :
-- Paris 1889 (Belle Époque, Tour Eiffel, Exposition Universelle) — à partir de 12 000€/pers.
-- Crétacé -65M ans (dinosaures, nature préhistorique) — à partir de 28 000€/pers. (voyage aventure)
-- Florence 1504 (Renaissance, art, Michel-Ange, Médicis) — à partir de 15 000€/pers.
-Réponds toujours en français, de façon concise (max 3-4 phrases). Tu peux suggérer des destinations selon les intérêts du client.`;
+// ============================================================
+// CHATBOT LOCAL — réponses prédéfinies
+// Pour revenir à Claude API, commenter ce bloc et décommenter
+// le bloc "CLAUDE API" plus bas.
+// ============================================================
 
-let history=[];
+function localReply(message) {
+  const msg = message.toLowerCase();
 
-async function sendMsg(){
-  const input=document.getElementById('chatInput');
-  const msgs=document.getElementById('chatMessages');
-  const text=input.value.trim();
-  if(!text)return;
-  input.value='';
-
-  const userDiv=document.createElement('div');
-  userDiv.className='msg msg-user';
-  userDiv.textContent=text;
-  msgs.appendChild(userDiv);
-  history.push({role:'user',content:text});
-  msgs.scrollTop=msgs.scrollHeight;
-
-  const typing=document.createElement('div');
-  typing.className='msg msg-bot msg-typing';
-  typing.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-  msgs.appendChild(typing);
-  msgs.scrollTop=msgs.scrollHeight;
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:SYSTEM,
-        messages:history
-      })
-    });
-    const data=await res.json();
-    const reply=data.content[0].text;
-    history.push({role:'assistant',content:reply});
-    typing.remove();
-    const botDiv=document.createElement('div');
-    botDiv.className='msg msg-bot';
-    botDiv.textContent=reply;
-    msgs.appendChild(botDiv);
-  }catch(e){
-    typing.remove();
-    const errDiv=document.createElement('div');
-    errDiv.className='msg msg-bot';
-    errDiv.textContent='Désolé, une erreur s\'est produite. Réessayez dans un instant.';
-    msgs.appendChild(errDiv);
+  if (msg.includes("paris")) {
+    return "Paris 1889 est notre destination la plus élégante. Vous pourrez découvrir l'Exposition Universelle et la Tour Eiffel dès 12 000€.";
   }
-  msgs.scrollTop=msgs.scrollHeight;
+  if (msg.includes("florence")) {
+    return "Florence 1504 est idéale pour les amateurs d'art et de Renaissance. Voyage à partir de 15 000€.";
+  }
+  if (msg.includes("crétacé") || msg.includes("cretace") || msg.includes("dinosaure")) {
+    return "Le Crétacé est parfait pour les aventuriers souhaitant observer les dinosaures dans leur environnement naturel. À partir de 28 000€.";
+  }
+  return "Je peux vous renseigner sur Paris 1889, Florence 1504 ou le Crétacé. Laquelle de ces époques vous attire ?";
+}
+
+// ============================================================
+// CLAUDE API (commenté — décommenter pour réactiver)
+// ============================================================
+//
+// const SYSTEM = `Tu es Chronos, l'assistant virtuel de TimeTravel Agency, une agence de voyage temporel de luxe.
+// Ton rôle : conseiller les clients sur les meilleures destinations temporelles.
+// Ton ton : professionnel mais chaleureux, passionné d'histoire, enthousiaste sans être trop familier.
+// Tu connais parfaitement :
+// - Paris 1889 (Belle Époque, Tour Eiffel, Exposition Universelle) — à partir de 12 000€/pers.
+// - Crétacé -65M ans (dinosaures, nature préhistorique) — à partir de 28 000€/pers. (voyage aventure)
+// - Florence 1504 (Renaissance, art, Michel-Ange, Médicis) — à partir de 15 000€/pers.
+// Réponds toujours en français, de façon concise (max 3-4 phrases). Tu peux suggérer des destinations selon les intérêts du client.`;
+//
+// let history = [];
+//
+// async function sendMsg() {
+//   const input = document.getElementById('chatInput');
+//   const msgs  = document.getElementById('chatMessages');
+//   const text  = input.value.trim();
+//   if (!text) return;
+//   input.value = '';
+//
+//   const userDiv = document.createElement('div');
+//   userDiv.className = 'msg msg-user';
+//   userDiv.textContent = text;
+//   msgs.appendChild(userDiv);
+//   history.push({ role: 'user', content: text });
+//   msgs.scrollTop = msgs.scrollHeight;
+//
+//   const typing = document.createElement('div');
+//   typing.className = 'msg msg-bot msg-typing';
+//   typing.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+//   msgs.appendChild(typing);
+//   msgs.scrollTop = msgs.scrollHeight;
+//
+//   try {
+//     const res = await fetch('https://api.anthropic.com/v1/messages', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({
+//         model: 'claude-sonnet-4-20250514',
+//         max_tokens: 1000,
+//         system: SYSTEM,
+//         messages: history
+//       })
+//     });
+//     const data  = await res.json();
+//     const reply = data.content[0].text;
+//     history.push({ role: 'assistant', content: reply });
+//     typing.remove();
+//     const botDiv = document.createElement('div');
+//     botDiv.className = 'msg msg-bot';
+//     botDiv.textContent = reply;
+//     msgs.appendChild(botDiv);
+//   } catch (e) {
+//     typing.remove();
+//     const errDiv = document.createElement('div');
+//     errDiv.className = 'msg msg-bot';
+//     errDiv.textContent = 'Désolé, une erreur s\'est produite. Réessayez dans un instant.';
+//     msgs.appendChild(errDiv);
+//   }
+//   msgs.scrollTop = msgs.scrollHeight;
+// }
+
+// ============================================================
+// sendMsg — version locale (utilise localReply)
+// ============================================================
+
+function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const msgs  = document.getElementById('chatMessages');
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  // Message utilisateur
+  const userDiv = document.createElement('div');
+  userDiv.className = 'msg msg-user';
+  userDiv.textContent = text;
+  msgs.appendChild(userDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Animation de frappe
+  const typing = document.createElement('div');
+  typing.className = 'msg msg-bot msg-typing';
+  typing.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Délai simulé pour un effet naturel
+  setTimeout(() => {
+    typing.remove();
+    const reply  = localReply(text);
+    const botDiv = document.createElement('div');
+    botDiv.className = 'msg msg-bot';
+    botDiv.textContent = reply;
+    msgs.appendChild(botDiv);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 600);
 }
 </script>
 </body>
